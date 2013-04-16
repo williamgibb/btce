@@ -28,7 +28,10 @@ correct_pairs = [['btc', 'usd'],
                 ['ltc','usd'],
                 ['btc','eur'],
                 ['ltc','eur'],
-                ['eur','usd'],]
+                ['eur','usd'],
+                ['trc','btc'],
+                ['nmc','btc'], 
+                ['ppc','btc'],]
 
 class BTCEError(Exception):
     def __init__(self, msg):
@@ -77,13 +80,10 @@ def api_request(method, misc_params = {}):
 def pubapi_request(pair, type):
     if pair in correct_pairs:
         combo = pair[0]+'_'+pair[1]
-        print combo
     else:
-        print 'can nopt find pair'
+        print 'can not find pair'
         return False
-    print 'buiding_url'
     url = "https://btc-e.com/api/2/" + combo + "/" + type
-    print url
     try:
         f = urllib.urlopen(url)
         return json.load(f)
